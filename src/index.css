@@ -1,7 +1,10 @@
-:root,html,body{
+:root,
+html,
+body {
   height: 100%;
   width: 100%;
   margin: 0;
+  box-sizing: border-box;
 }
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -10,15 +13,15 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: rgb(15 23 42);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-  --map-width: 400px;
-  --map-height: 400px;
+  --map-width: 25rem;
+  --map-height: 25rem;
 }
 
 a {
@@ -67,17 +70,3 @@ button:focus-visible {
   }
 }
 
-.map-container {
-  height: var(--map-height);
-  width: var(--map-width);
-  /* border-radius: 20px; */
-}
-
-.mapboxgl-canvas{
-height: var(--map-height) !important;
-width: var(--map-width) !important;
-}
-
-section{
-  padding: 1rem;
-}
