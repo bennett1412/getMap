@@ -27,7 +27,6 @@ const Cube = () => {
     if (imgData) {
       createBox(box, sceneRef.current);
       canvasRef.current.scrollIntoView({ behavior: 'smooth' });
-      console.log(canvasRef)
     }
   }, [imgData])
 
