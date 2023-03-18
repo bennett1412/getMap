@@ -37,9 +37,6 @@ const Cube = () => {
 
   const createBox = (box, scene) => {
     box = MeshBuilder.CreateBox('box', { size: 3 }, scene)
-
-    // Move the box upward 1/2 its height
-    // box.position.y = 1
     var mat = new StandardMaterial("dog", scene);
     mat.emissiveTexture = new Texture(imgData, scene);
     mat.backFaceCulling = false;
@@ -52,27 +49,24 @@ const Cube = () => {
     });
 
     sceneRef.current = scene;
-    // This creates and positions a free camera (non-mesh)
     var camera = new ArcRotateCamera("Camera", 3 * Math.PI / 2, Math.PI / 2, 50, Vector3.Zero(), scene)
 
-    // This targets the camera to scene origin
     camera.setTarget(Vector3.Zero())
     const engine = scene.getEngine();
     const canvas = scene.getEngine().getRenderingCanvas();
 
 
-    // This attaches the camera to the canvas
     camera.attachControl(canvas, true)
     camera.lowerRadiusLimit = 8;
     camera.upperRadiusLimit = 8;
 
 
-    // Our built-in 'box' shape.
+    // creates the box shape
     createBox(box, scene);
   }
 
   /**
-   * Will run on every frame render.  We are spinning the box on y-axis.
+   * Will run on every frame render.
    */
   const onRender = (scene) => {
 

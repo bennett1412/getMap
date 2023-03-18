@@ -34,7 +34,6 @@ const Map = ({ defLat, defLng }) => {
       const canvas = map.current.getCanvas();
       let url = canvas.toDataURL('image/png');
       setMapImg(url);
-      // document.write(`<img src='${url}'/>`)
     }
   }
   return (
