@@ -15,14 +15,19 @@ import {
 import SceneComponent from 'babylonjs-hook'
 import useAppStore from '../zustand/appStore';
 import '../styles/babylonjs.scss';
+import { toast } from 'react-hot-toast';
 
 const Cube = () => {
   const imgData = useAppStore((state) => state.mapImg);
   const sceneRef = useRef(null);
+  const canvasRef = useRef(null);
+
   let box;
   useEffect(() => {
     if (imgData) {
       createBox(box, sceneRef.current);
+      canvasRef.current.scrollIntoView({ behavior: 'smooth' });
+      console.log(canvasRef)
     }
   }, [imgData])
 
@@ -34,7 +39,7 @@ const Cube = () => {
     box = MeshBuilder.CreateBox('box', { size: 3 }, scene)
 
     // Move the box upward 1/2 its height
-    box.position.y = 1
+    // box.position.y = 1
     var mat = new StandardMaterial("dog", scene);
     mat.emissiveTexture = new Texture(imgData, scene);
     mat.backFaceCulling = false;
@@ -42,6 +47,10 @@ const Cube = () => {
     box.material = mat;
   }
   const onSceneReady = (scene) => {
+    toast('Feel free to play around with the Cube', {
+      id: "cube-created"
+    });
+
     sceneRef.current = scene;
     // This creates and positions a free camera (non-mesh)
     var camera = new ArcRotateCamera("Camera", 3 * Math.PI / 2, Math.PI / 2, 50, Vector3.Zero(), scene)
@@ -66,6 +75,7 @@ const Cube = () => {
    * Will run on every frame render.  We are spinning the box on y-axis.
    */
   const onRender = (scene) => {
+
     if (box !== undefined && box) {
       var deltaTimeInMillis = scene.getEngine().getDeltaTime()
 
@@ -74,9 +84,9 @@ const Cube = () => {
     }
   }
 
-  return (<>
-    {imgData && <SceneComponent on antialias onSceneReady={onSceneReady} onRender={onRender} id={'babylonjs-canvas'} />}
-  </>)
+  return (<section ref={canvasRef} style={{ height: '100%', width: '100%', display: 'flex', justifyContent: 'center' }}>
+    {imgData && <SceneComponent adaptToDeviceRatio antialias onSceneReady={onSceneReady} onRender={onRender} id={'babylonjs-canvas'} />}
+  </section>)
 }
 
 export default Cube;
